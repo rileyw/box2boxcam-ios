@@ -89,7 +89,10 @@ struct CheckRunner {
             ("highlights: sustained fast ball, reacquired after long loss, 8 s rate limit", checkHighlightDetector),
             ("match log beyond 15 seconds, video timestamps, all balls and finalization", checkMatchLogTimeline),
             ("match log bounded backpressure and concurrent writes", checkMatchLogBackpressure),
-            ("match log encoding failure and existing recording protection", checkMatchLogFailure)
+            ("match log encoding failure and existing recording protection", checkMatchLogFailure),
+            ("latency summary: nearest-rank percentiles, mean and rate", checkLatencySummaryPercentiles),
+            ("latency summary drops non-finite and negative samples", checkLatencySummaryRejectsInvalidSamples),
+            ("model benchmark report: JSON round trip and markdown table", checkModelBenchmarkReportRoundTrip)
         ]
         var failures = 0
         for (name, check) in checks {

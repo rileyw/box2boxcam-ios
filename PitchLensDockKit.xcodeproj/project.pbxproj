@@ -20,6 +20,8 @@
 		A000000000000000000000F2 = {isa = PBXBuildFile; fileRef = B000000000000000000000F2; };
 		A00000000000000000000021 = {isa = PBXBuildFile; fileRef = B00000000000000000000021; };
 		A00000000000000000000022 = {isa = PBXBuildFile; fileRef = B00000000000000000000022; };
+		A000000000000000000000F3 /* LatencyStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = B000000000000000000000F3 /* Sources/DockKitCore/LatencyStats.swift */; };
+		A000000000000000000000F4 /* ModelBenchmark.swift in Sources */ = {isa = PBXBuildFile; fileRef = B000000000000000000000F4 /* ModelBenchmark.swift */; };
 		A00000000000000000000001 /* PitchLensDockKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000001 /* PitchLensDockKitApp.swift */; };
 		A00000000000000000000002 /* DiagnosticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000002 /* DiagnosticView.swift */; };
 		A00000000000000000000003 /* DockKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000003 /* DockKitModel.swift */; };
@@ -60,6 +62,8 @@
 		B000000000000000000000F2 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/DockKitCore/PlayerPanLeash.swift; sourceTree = "<group>"; };
 		B00000000000000000000021 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/DockKitCore/AutoZoomPolicy.swift; sourceTree = "<group>"; };
 		B00000000000000000000022 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/DockKitCore/HighlightDetector.swift; sourceTree = "<group>"; };
+		B000000000000000000000F3 /* Sources/DockKitCore/LatencyStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/DockKitCore/LatencyStats.swift; sourceTree = "<group>"; };
+		B000000000000000000000F4 /* ModelBenchmark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelBenchmark.swift; sourceTree = "<group>"; };
 		B00000000000000000000001 /* PitchLensDockKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchLensDockKitApp.swift; sourceTree = "<group>"; };
 		B00000000000000000000002 /* DiagnosticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticView.swift; sourceTree = "<group>"; };
 		B00000000000000000000003 /* DockKitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockKitModel.swift; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 				B0000000000000000000001F,
 				B0000000000000000000000B /* BallDetector.swift */,
 				B00000000000000000000014 /* LiveDiagnostic.swift */,
+				B000000000000000000000F4 /* ModelBenchmark.swift */,
 				B00000000000000000000015 /* MatchRecording.swift */,
 				B00000000000000000000001 /* PitchLensDockKitApp.swift */,
 				B00000000000000000000002 /* DiagnosticView.swift */,
@@ -156,6 +161,7 @@
 				B000000000000000000000F2,
 				B00000000000000000000021,
 				B00000000000000000000022,
+				B000000000000000000000F3 /* Sources/DockKitCore/LatencyStats.swift */,
 				B00000000000000000000007 /* Sources/DockKitCore/MotorController.swift */,
 				B00000000000000000000016 /* Sources/DockKitCore/MatchLogWriter.swift */,
 			);
@@ -262,8 +268,10 @@
 				A000000000000000000000F2,
 				A00000000000000000000021,
 				A00000000000000000000022,
+				A000000000000000000000F3 /* LatencyStats.swift in Sources */,
 				A0000000000000000000000B /* BallDetector.swift in Sources */,
 				A00000000000000000000014 /* LiveDiagnostic.swift in Sources */,
+				A000000000000000000000F4 /* ModelBenchmark.swift in Sources */,
 				A00000000000000000000015 /* MatchRecording.swift in Sources */,
 				A00000000000000000000016 /* MatchLogWriter.swift in Sources */,
 				A00000000000000000000001 /* PitchLensDockKitApp.swift in Sources */,
