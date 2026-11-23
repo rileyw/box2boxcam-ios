@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Fast: the platform-independent DockKitCore checks, no models or Xcode project needed.
+  core:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - run: xcodebuild -version && swift --version
+      - name: Parse all Swift sources
+        run: swiftc -frontend -parse PitchLensDockKit/*.swift DockKitCore/Sources/DockKitCore/*.swift
+      - name: DockKitCore checks
+        run: swift run --package-path DockKitCore MotorControllerChecks
+
+  # Full project check and unsigned iOS build, with the Core ML models the project references.
+  app:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Cache Core ML models
+        id: models
+        uses: actions/cache@v4
+        with:
+          path: PitchLensDockKit/Models
+          key: coreml-models-${{ hashFiles('scripts/fetch-models.sh', 'scripts/export-person-models.py') }}
+      - name: Fetch and export models
+        if: steps.models.outputs.cache-hit != 'true'
+        run: scripts/fetch-models.sh
+      - name: Project checks and unsigned iOS build
+        run: scripts/check-dockkit.sh
