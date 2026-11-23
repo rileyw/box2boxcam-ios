@@ -89,7 +89,10 @@ struct CheckRunner {
             ("highlights: sustained fast ball, reacquired after long loss, 8 s rate limit", checkHighlightDetector),
             ("match log beyond 15 seconds, video timestamps, all balls and finalization", checkMatchLogTimeline),
             ("match log bounded backpressure and concurrent writes", checkMatchLogBackpressure),
-            ("match log encoding failure and existing recording protection", checkMatchLogFailure)
+            ("match log encoding failure and existing recording protection", checkMatchLogFailure),
+            ("candidate suppression IoU: overlap, touching, invalid boxes, aspect-ratio invariant", checkCandidateSuppressionIoU),
+            ("candidate suppression drops near-duplicates, keeps order and greedy chains", checkCandidateSuppressionDropsNearDuplicates),
+            ("candidate suppression edge cases: empty, ties, non-finite scores, threshold 1", checkCandidateSuppressionEdgeCases)
         ]
         var failures = 0
         for (name, check) in checks {

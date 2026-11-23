@@ -20,6 +20,7 @@
 		A000000000000000000000F2 = {isa = PBXBuildFile; fileRef = B000000000000000000000F2; };
 		A00000000000000000000021 = {isa = PBXBuildFile; fileRef = B00000000000000000000021; };
 		A00000000000000000000022 = {isa = PBXBuildFile; fileRef = B00000000000000000000022; };
+		A000000000000000000000F5 /* CandidateSuppression.swift in Sources */ = {isa = PBXBuildFile; fileRef = B000000000000000000000F5 /* Sources/DockKitCore/CandidateSuppression.swift */; };
 		A00000000000000000000001 /* PitchLensDockKitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000001 /* PitchLensDockKitApp.swift */; };
 		A00000000000000000000002 /* DiagnosticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000002 /* DiagnosticView.swift */; };
 		A00000000000000000000003 /* DockKitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000003 /* DockKitModel.swift */; };
@@ -60,6 +61,7 @@
 		B000000000000000000000F2 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/DockKitCore/PlayerPanLeash.swift; sourceTree = "<group>"; };
 		B00000000000000000000021 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/DockKitCore/AutoZoomPolicy.swift; sourceTree = "<group>"; };
 		B00000000000000000000022 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/DockKitCore/HighlightDetector.swift; sourceTree = "<group>"; };
+		B000000000000000000000F5 /* Sources/DockKitCore/CandidateSuppression.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/DockKitCore/CandidateSuppression.swift; sourceTree = "<group>"; };
 		B00000000000000000000001 /* PitchLensDockKitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchLensDockKitApp.swift; sourceTree = "<group>"; };
 		B00000000000000000000002 /* DiagnosticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticView.swift; sourceTree = "<group>"; };
 		B00000000000000000000003 /* DockKitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DockKitModel.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				B000000000000000000000F2,
 				B00000000000000000000021,
 				B00000000000000000000022,
+				B000000000000000000000F5 /* Sources/DockKitCore/CandidateSuppression.swift */,
 				B00000000000000000000007 /* Sources/DockKitCore/MotorController.swift */,
 				B00000000000000000000016 /* Sources/DockKitCore/MatchLogWriter.swift */,
 			);
@@ -262,6 +265,7 @@
 				A000000000000000000000F2,
 				A00000000000000000000021,
 				A00000000000000000000022,
+				A000000000000000000000F5 /* CandidateSuppression.swift in Sources */,
 				A0000000000000000000000B /* BallDetector.swift in Sources */,
 				A00000000000000000000014 /* LiveDiagnostic.swift in Sources */,
 				A00000000000000000000015 /* MatchRecording.swift in Sources */,

@@ -33,6 +33,8 @@ struct LiveFrameRecord: Codable, Sendable {
     let searchWindow: [Double]?
     /// Candidates removed by the static candidate filter; absent while that setting is off.
     let staticDropped: Int?
+    /// Near-duplicate boxes removed before tracking (CandidateSuppression, IoU 0.7).
+    let duplicatesDropped: Int?
 
     init(frame: BallDetectionFrame, now: Double, threshold: Double, outcome: String, manuallySelected: Bool) {
         func finite(_ value: Double) -> Double? { value.isFinite ? value : nil }
@@ -51,6 +53,7 @@ struct LiveFrameRecord: Codable, Sendable {
         self.manuallySelected = manuallySelected
         camera = frame.captureTelemetry
         staticDropped = frame.staticDropped
+        duplicatesDropped = frame.duplicatesDropped
         searchWindow = frame.searchWindow.map {
             [$0.rect.minX, $0.rect.minY, $0.rect.width, $0.rect.height].map { Double($0) }
         }

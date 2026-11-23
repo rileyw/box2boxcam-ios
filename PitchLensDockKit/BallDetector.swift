@@ -21,6 +21,7 @@ struct BallDetectionFrame: Sendable {
     var hybridReferenceID: UUID? = nil
     var searchWindow: BallSearchWindow? = nil // Set only while the local window setting is on.
     var staticDropped: Int? = nil // Set only while the static candidate filter is on.
+    var duplicatesDropped = 0 // Near-duplicate boxes removed by CandidateSuppression.
     let generation: UUID
     let box: CGRect? // Normalized, top-left origin, upright image matching the preview.
     let confidence: Double
@@ -255,8 +256,14 @@ final class BallDetector: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
                      }]
                 }
                 let completedAt = ProcessInfo.processInfo.systemUptime
-                var ballCandidates = candidates.map { BallCandidate(x: $0.0.midX, y: $0.0.midY, width: $0.0.width, height: $0.0.height, confidence: $0.1) }
                 // Before every tracker; box, score and candidateCount stay unfiltered diagnostics.
+                // The model's own NMS stage keeps near-duplicate boxes (it reads its IoU 0.7
+                // like a standard NMS at about 0.9), so suppress them at a standard IoU 0.7.
+                // The best box is always kept.
+                let deduplicated = CandidateSuppression.suppress(candidates.map {
+                    BallCandidate(x: $0.0.midX, y: $0.0.midY, width: $0.0.width, height: $0.0.height, confidence: $0.1)
+                })
+                var ballCandidates = deduplicated.kept
                 var staticDropped: Int?
                 if staticFilterEnabled {
                     let filtered = staticFilter.filter(ballCandidates, timestamp: capturedAt,
@@ -278,6 +285,7 @@ final class BallDetector: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate
                     candidateCount: candidates.count, otherObjects: otherObjects, error: nil, captureTelemetry: telemetry)
                 if localWindowEnabled { frame.searchWindow = window }
                 frame.staticDropped = staticDropped
+                frame.duplicatesDropped = deduplicated.dropped
                 if hybridEnabled {
                     frame.hybridPeople = peopleProcessor.latest(reference: cameraMotion.referenceID)
                     frame.hybridCameraCenter = cameraMotion.center
