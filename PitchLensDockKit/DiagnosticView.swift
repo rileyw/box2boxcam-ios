@@ -7,6 +7,7 @@ import AVKit
 struct AdvancedSettingsView: View {
     @ObservedObject var model: DockKitModel
     @Environment(\.dismiss) private var dismiss
+    @StateObject private var benchmark = ModelBenchmark()
 
     var body: some View { settings }
 
@@ -101,6 +102,19 @@ struct AdvancedSettingsView: View {
                             .font(.caption)
                     }
                     Text("Jaune : ballon suivi (anneau plein), trace et orientations retenues. Blanc : ballon incertain, squelettes, orientations ambiguës (pâles), cible choisie (croix) et cible joueurs (losange). Pointillés : propositions YOLO. Les scores YOLO et la continuité de piste sont distincts.").font(.caption)
+                }
+                Section("Banc d’essai des modèles") {
+                    Text("Mesure la latence de chaque modèle (ballon, joueurs, poses) seul, sur une image de synthèse, avec le Neural Engine, le GPU et le CPU. La caméra est coupée pendant la mesure (2 à 5 min). Partage le rapport JSON pour comparer les iPhone.").font(.caption)
+                    Button(benchmark.isRunning ? "Mesure en cours…" : "Mesurer la latence des modèles") {
+                        Task { await benchmark.run(camera: model.camera) }
+                    }.disabled(benchmark.isRunning || model.isRecordingMatch || model.isChangingCamera)
+                    if !benchmark.progress.isEmpty { Text(benchmark.progress).font(.caption.monospacedDigit()) }
+                    if let report = benchmark.report {
+                        Text(report.markdownTable).font(.caption2.monospaced()).textSelection(.enabled)
+                    }
+                    if let url = benchmark.reportURL {
+                        ShareLink(item: url) { Label("Partager le rapport", systemImage: "square.and.arrow.up") }
+                    }
                 }
                 Section("Connexion") {
                     Text(model.connectionMessage)
